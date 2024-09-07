@@ -20,6 +20,7 @@
     <script src="assets/js/todolist.js"></script>
     <script src="assets/js/rural-search.js"></script>
     <script src="assets/js/urban-search.js"></script>
+    <script src="assets/js/mail-otp.js"></script>
     <!-- End custom js for this page -->
     <script src="assets/js/ruralJharkhandData.js"></script>
     <script src="assets/js/urbanJharkhandData.js"></script>

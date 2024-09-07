@@ -1,6 +1,10 @@
 package com.crm.home;
 
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,8 +14,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.crm.model.AssignTask;
 import com.crm.model.Report;
 import com.crm.model.User;
+import com.crm.service.AssignTaskService;
 import com.crm.service.ReportService;
 import com.crm.service.UserService;
 
@@ -25,6 +31,9 @@ public class PageController {
 	
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private AssignTaskService assignTask;
 
 	// Login page
 	@GetMapping("/")
@@ -124,10 +133,37 @@ public class PageController {
 		model.addAttribute("title", "Add Inbound Report");
 		return "add-inbound-report";
 	}
+	
 	@RequestMapping("/view-inbound")
 	public String viewInboundReport(Model model) {
 		model.addAttribute("title", "View Inbound Report");
 		return "view-inbound-report";
+	}
+	
+	@RequestMapping("/view-task")
+	public String viewAssignedTask(Model model) {
+	    model.addAttribute("title", "View All Assigned Task");
+	    List<AssignTask> allAssignedTask = assignTask.getAllAssignedTask();
+
+	    // Collect unique user IDs from tasks
+	    Set<Long> userIdSet = new HashSet<>();
+	    for (AssignTask task : allAssignedTask) {
+	        userIdSet.add(task.getUserId());
+	    }
+
+	    // Retrieve users based on user IDs
+	    List<User> userList = userService.getUserList(userIdSet);
+
+	    // Create a mapping from user ID to user name
+	    Map<Long, String> userIdToUserName = new HashMap<>();
+	    for (User u : userList) {
+	        userIdToUserName.put(u.getId(), u.getName());
+	    }
+
+	    // Add the mapping and tasks to the model
+	    model.addAttribute("userIdToUserName", userIdToUserName);
+	    model.addAttribute("tasks", allAssignedTask);
+	    return "view-assigned-task";
 	}
 	
 	

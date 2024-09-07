@@ -29,13 +29,27 @@ public class LoginController {
 		
 		if(admin != null && user.getPassword().equals(admin.getPassword())) {
 			session.setAttribute("userSession", admin.getEmail());
+			String[] split = admin.getName().split(" ");
+			String adminName = null;
+			for(int i=0; i<=split.length; i++) {
+				adminName = split[i];
+				break;
+			}
+			session.setAttribute("loginUserName", adminName);
 			model.addAttribute("title", "Dashboard");
 			return "admin-dashboard";
 		}
 		else if(users != null && user.getPassword().equals(users.getPassword())){
 			session.setAttribute("userSession", users.getEmail());
 			User userDB = loginService.adminLogin(false, user.getEmail());
+			String[] split = userDB.getName().split(" ");
+			String userName = null;
+			for(int i=0; i<=split.length; i++) {
+				userName = split[i];
+				break;
+			}
 			session.setAttribute("loginUserId", userDB.getId());
+			session.setAttribute("loginUserName", userName);
 			model.addAttribute("title", "Dashboard");
 			return "user-dashboard";
 		}

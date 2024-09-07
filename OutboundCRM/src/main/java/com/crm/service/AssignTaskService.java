@@ -1,6 +1,7 @@
 package com.crm.service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,4 +24,12 @@ public class AssignTaskService {
 		return assignTaskRepo.findByUserIdAndTime(id);
 	}
 	
+	public List<AssignTask> getAllAssignedTask(){
+		return assignTaskRepo.findAll();
+	}
+	
+	public boolean deleteByTaskId(long id) {
+		assignTaskRepo.deleteById(id);
+		return true;
+	}
 }

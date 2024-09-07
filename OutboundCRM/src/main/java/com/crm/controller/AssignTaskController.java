@@ -2,7 +2,9 @@ package com.crm.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.crm.model.AssignTask;
@@ -28,5 +30,11 @@ public class AssignTaskController {
 			session.setAttribute("assigned", assignedTask);
 			return "redirect:/add-csv";
 		}
+	}
+	
+	@GetMapping("/deleteTask/{taskId}")
+	public String deleteTask(@PathVariable long taskId) {
+		assignTaskService.deleteByTaskId(taskId);
+		return "redirect:/view-task";
 	}
 }

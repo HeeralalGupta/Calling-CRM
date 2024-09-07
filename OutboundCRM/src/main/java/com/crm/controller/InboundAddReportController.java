@@ -55,8 +55,8 @@ public class InboundAddReportController {
 				// Fetching csv file data
 				List<String[]> csvData = csvFileService.getCsvData();
 				List<String[]> csvRows = getCsvRowsBySerialNumberRange(csvData, min, max);
-
-				if (currentSerialNumber <= max && currentSerialNumber < csvData.size()) {
+				
+				if ((currentSerialNumber <= max && currentSerialNumber <= csvRows.size())) {
 					String[] csvRow = csvRows.get((int) (currentSerialNumber - 1)); // Fetch the current row
 					// Note: Iterate this string and set one data to one model
 					model.addAttribute("csvRow", csvRow); // Add the current row to the model

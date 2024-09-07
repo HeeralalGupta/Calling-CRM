@@ -1,6 +1,7 @@
 package com.crm.service;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,6 +15,7 @@ public class UserService {
 	@Autowired
 	private UserRepository userRepository;
 	
+	
 	public User createUser(User user) {
 		return userRepository.save(user);
 	}
@@ -26,5 +28,10 @@ public class UserService {
 		userRepository.deleteById(id);
 	}
 	
+	 // Method to get list of users by a set of user IDs
+    public List<User> getUserList(Set<Long> userIdSet) {
+        // Spring Data JPA's findAllById method can take a collection of IDs
+        return userRepository.findAllById(userIdSet);
+    }
 	
 }

@@ -44,6 +44,35 @@
 					session.removeAttribute("deleteSuccess");
 				}
 				%>
+				
+				<!-- ================================== Alert dialogue start======================================== -->
+		
+				
+				<!-- Modal -->
+				<div class="modal fade" id="otpDialog" style="display:none;" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+				  <div class="modal-dialog modal-dialog-centered" role="document">
+				    <div class="modal-content">
+				      <div class="modal-header">
+				        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+				        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				          <span aria-hidden="true">&times;</span>
+				        </button>
+				      </div>
+				      <div class="modal-body">
+				        <div>
+						  <h2>Confirm Deletion</h2>
+						  <p>An OTP has been sent to your email. Please enter it below to confirm deletion.</p>
+						  <input type="text" id="otpInput" placeholder="Enter OTP">					  
+						</div>
+				      </div>
+				      <div class="modal-footer">
+				          <button class="btn btn-info" onclick="verifyOtp()">Delete</button>
+						  <button class="btn btn-danger" onclick="closeOtpDialog()">Cancel</button>
+				      </div>
+				    </div>
+				  </div>
+				</div>
+				<!-- =================================== Alert dialogue end======================================= -->
 				<div class="row">
 					<div class="col-12">
 						<div class="card">
@@ -119,7 +148,7 @@
 													<td>${sno.count}</td>
 													<td>${user.name}</td>
 													<td>${user.email}</td>
-													<td><a href="javascript:void(0);" onclick="deleteUser('${user.id}')"><img src="assets/images/delete-icon.png"></a></td>
+													<td><a href="javascript:void(0);" onclick="openOtpDialog('${user.id}', '${user.email}')"><img src="assets/images/delete-icon.png"></a></td>
 												</tr>
 											</c:forEach>
 										</tbody>
