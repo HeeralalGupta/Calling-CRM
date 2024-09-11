@@ -57,7 +57,8 @@
 								<c:if test="${tcId != null}">
 									<div class="text-bold cid" id="tcid">${tcId}</div>
 								</c:if>
-								<h4 class="card-description text-info text-bold">Call Disposition</h4>
+								<h4 class="card-description text-info text-bold">Call
+									Disposition</h4>
 
 								<form action="/add-inbound" method="post" class="form-sample">
 									<input type="hidden" name="userId" value="${userId}">
@@ -136,18 +137,20 @@
 										<div class="row">
 											<c:forEach var="data" items="${csvRow}" varStatus="status">
 												<c:choose>
-													<c:when test="${status.count == 2 }">
+													<c:when test="${status.count == 2}">
 														<div class="col-md-4">
 															<div class="form-group row">
 																<label class="col-sm-3 col-form-label">Name<span
 																	style="color: red;">*</span></label>
 																<div class="col-sm-9">
 																	<input type="text" name="name" class="form-control"
-																		value="${data}" placeholder="Name" required />
+																		value="${data != null ? data : ''}" placeholder="Name"
+																		required />
 																</div>
 															</div>
 														</div>
 													</c:when>
+
 													<c:when test="${status.count == 3 }">
 														<div class="col-md-4">
 															<div class="form-group row">
@@ -391,11 +394,11 @@
 											<div class="form-group row">
 												<label class="col-sm-3 col-form-label">Lok Sabha</label>
 												<div class="col-sm-9">
-													<select class="form-control" id="municipalityDropdown"
+													<select class="form-control" id="lokSabhaDropdown"
 														name="lokSabha">
-														<option value="">Select Lok Sabha</option>
+														<option value="">Select Option</option>
 														<!-- Dynamic Data will populate -->
-														<option>Test</option>
+
 													</select>
 												</div>
 											</div>
@@ -404,11 +407,10 @@
 											<div class="form-group row">
 												<label class="col-sm-3 col-form-label">Vidhan Sabha</label>
 												<div class="col-sm-9">
-													<select class="form-control" id="municipalityDropdown"
+													<select class="form-control" id="vidhanSabhaDropdown"
 														name="vidhanSabha">
-														<option value="">Select Vidhan Sabha</option>
+														<option value="">Select Option</option>
 														<!-- Dynamic Data will populate -->
-														<option>Test</option>
 													</select>
 												</div>
 											</div>
@@ -417,21 +419,21 @@
 											<div class="form-group row">
 												<label class="col-sm-3 col-form-label">Sub Division</label>
 												<div class="col-sm-9">
-													<select class="form-control" id="municipalityDropdown"
+													<select class="form-control" id="subDivisionDropdown"
 														name="subDivision">
-														<option value="">Select Sub Division</option>
+														<option value="">Select Option</option>
 														<!-- Dynamic Data will populate -->
-														<option>Test</option>
 													</select>
 												</div>
 											</div>
 										</div>
 									</div>
+
 									<div class="row">
 
 										<div class="col-md-4">
 											<div class="form-group row">
-												<label class="col-sm-3 col-form-label">Ward No.</label>
+												<label class="col-sm-3 col-form-label">Booth No.</label>
 												<div class="col-sm-9">
 													<input type="number" name="ruralWardNumber"
 														placeholder="Ward Number" class="form-control" required />

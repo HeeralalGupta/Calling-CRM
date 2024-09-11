@@ -148,7 +148,7 @@
 													<td>${sno.count}</td>
 													<td>${user.name}</td>
 													<td>${user.email}</td>
-													<td><a href="javascript:void(0);" onclick="openOtpDialog('${user.id}', '${user.email}')"><img src="assets/images/delete-icon.png"></a></td>
+													<td><a href="javascript:void(0);" onclick="deleteUser('${user.id}')" <%-- onclick="openOtpDialog('${user.id}', '${user.email}')" --%>><img src="assets/images/delete-icon.png"></a></td>
 												</tr>
 											</c:forEach>
 										</tbody>
